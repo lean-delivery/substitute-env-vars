@@ -1,10 +1,10 @@
 # Introduction to SEV
 How many times have you been facing a situation when you have some dockerized application which stores its configuration on the filesystem?
 
-What's a problem you may ask.
-In a usual Docker world we would prefer to override or even intialize configuration parameters over environment variables.
+What's a problem you may ask.  
+In a usual Docker world we would prefer to override or even initialize configuration parameters over environment variables.
 
-Why is that ?
+Why is that ?  
 By design all Docker containers are stateless. 
 
 That means, by default, working with stateful techniques in Docker (filesystem is one of those) increases complexity and operational costs.
@@ -23,7 +23,7 @@ We have `3` environments:
 * qa
 * production
 
-And using `Adobe Analytics` for collecting data of user activities.
+And using `Adobe Analytics` and `Google Analytics` for collecting data of user activities.
 
 
 **Important Note**
@@ -93,7 +93,7 @@ This is where the `sev` comes handy.
 
 ### Good time to put `sev` in action
 ```sh
-# First, let's define and intialize environment variables:
+# First, let's define and initialize environment variables:
 export ADOBE_ANALYTICS_URL=//assets.adobedtm.com/sc99ai/a9da01/launch-dif9-staging.min.js
 export GOOGLE_ANALYTICS_URL=//test.url.com/?utm_source=newsletter&utm_medium=banner&utm_campaign=spring_sale
 
@@ -123,7 +123,7 @@ N/A
 2020/04/20 13:01:51 INFO: sev succeeded: /html/index.html 
 ```
 
-### Checking `index.html` after `sev` processing
+### Checking `index.html` processed by `sev`
 ```sh=
 ...
 <script
@@ -137,7 +137,9 @@ N/A
 ...
 ```
 
-## Final Dockerfile
+## Final Docker Image
+The final Docker image implemented with `sev`makes maintenance of our application's parameters simple, straight-forward and informative
+### Dockerfile
 ```Dockerfile=
 FROM nginx:alpine
 
