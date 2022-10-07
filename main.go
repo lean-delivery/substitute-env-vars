@@ -21,8 +21,7 @@ var VAR_NAMES_STORAGE = os.Getenv("VAR_NAMES_STORAGE")
 var VAR_VALUES_SETS_STORAGE = os.Getenv("VAR_VALUES_SETS_STORAGE")
 var VAR_VALUES_SETS_CHOSEN_ID = os.Getenv("VAR_VALUES_SETS_CHOSEN_ID")
 
-var announcementTemplate =
-`
+var announcementTemplate = `
 ##### START SEV ANNOUNCEMENT #####
 
 ## Target environment variables
@@ -40,7 +39,7 @@ _{MODE}_
 type envVarValuesSets map[string]interface{}
 type envVarNames []string
 
-func (evv *envVarValuesSets) fetch(){
+func (evv *envVarValuesSets) fetch() {
 	if VAR_VALUES_SETS_STORAGE != "" {
 
 		var tmp interface{}
@@ -61,7 +60,7 @@ func (evv *envVarValuesSets) fetch(){
 	}
 }
 
-func (evv envVarValuesSets) getAnnouncement() string{
+func (evv envVarValuesSets) getAnnouncement() string {
 
 	if _setsOfValuesModeEnabled {
 
@@ -89,15 +88,14 @@ func (evv envVarValuesSets) getAnnouncement() string{
 
 			for key, value := range evv[VAR_VALUES_SETS_CHOSEN_ID].(map[string]interface{}) {
 
-
 				var resValue string
 
-				switch reflect.TypeOf(value).String(){
+				switch reflect.TypeOf(value).String() {
 				case "float64":
 					var f = value.(float64)
 					ipart := int64(f)
 					decpart := fmt.Sprintf("%.6g", f-float64(ipart))
-					if len(decpart) == 1{
+					if len(decpart) == 1 {
 						resValue = fmt.Sprintf(`%.0f`, value)
 					} else {
 						resValue = fmt.Sprintf(`%f`, value)
@@ -108,7 +106,6 @@ func (evv envVarValuesSets) getAnnouncement() string{
 				default:
 					resValue = value.(string)
 				}
-
 
 				//if reflect.TypeOf(value)
 				announcement += fmt.Sprintf("  %s = %s\n", key, resValue)
@@ -121,7 +118,7 @@ func (evv envVarValuesSets) getAnnouncement() string{
 	}
 }
 
-func (evn envVarNames) getAnnouncement() string{
+func (evn envVarNames) getAnnouncement() string {
 	var announcement string
 
 	for _, ev := range evn {
@@ -132,35 +129,32 @@ func (evn envVarNames) getAnnouncement() string{
 
 }
 
-func (evn *envVarNames) fetch(){
+func (evn *envVarNames) fetch() {
 
-	if VAR_NAMES_STORAGE == "" && VAR_NAMES_STORAGE_PATH == ""{
+	if VAR_NAMES_STORAGE == "" && VAR_NAMES_STORAGE_PATH == "" {
 		log.Fatalf("ERROR: Not VAR_NAMES_STORAGE nor VAR_NAMES_STORAGE_PATH initialized")
 	}
 
 	if VAR_NAMES_STORAGE_PATH != "" {
 		envVars, err := ioutil.ReadFile(VAR_NAMES_STORAGE_PATH)
 		if err != nil {
-			log.Fatalf("ERROR: Failed reading storage in %s:\n%v", VAR_NAMES_STORAGE_PATH)
+			log.Fatalf("ERROR: Failed reading storage in %s:\n%v", VAR_NAMES_STORAGE_PATH, err)
 		} else {
 			*evn = strings.Split(string(envVars), "\n")
 		}
 	}
 
-	if VAR_NAMES_STORAGE != ""{
+	if VAR_NAMES_STORAGE != "" {
 		*evn = strings.Split(VAR_NAMES_STORAGE, ",")
 	}
 
 	// Remove whitespaces
-	for i, ev := range *evn{
+	for i, ev := range *evn {
 		(*evn)[i] = strings.ReplaceAll(strings.ReplaceAll(ev, " ", ""), "\t", "")
 	}
 }
 
-
-
-
-func main(){
+func main() {
 
 	if len(os.Args) == 1 {
 		log.Fatalf("ERROR: destination path missing")
@@ -175,7 +169,7 @@ func main(){
 	vva := _varValues.getAnnouncement()
 
 	mode := "  Pulling values for variables from environment"
-	if _setsOfValuesModeEnabled{
+	if _setsOfValuesModeEnabled {
 		mode = "  Pulling sets of values for variables from JSON structure saved at {env.VAR_VALUES_SETS_STORAGE}"
 	}
 
@@ -186,24 +180,24 @@ func main(){
 
 	stat, pathExists, _ := pathExists(_path)
 
-	if pathExists{
+	if pathExists {
 		switch {
 		case stat.IsDir():
 			_varNames.processDir(_path)
-		case ! stat.IsDir():
+		case !stat.IsDir():
 			_varNames.processFile(_path, stat.Mode())
 		}
 	}
 }
 
-func (evn envVarNames) processDir(_path string){
+func (evn envVarNames) processDir(_path string) {
 	err := filepath.Walk(_path,
 		func(path string, info os.FileInfo, err error) error {
 
 			if err != nil {
 				return err
 			}
-			if ! info.IsDir() {
+			if !info.IsDir() {
 
 				evn.processFile(path, info.Mode())
 
@@ -216,7 +210,7 @@ func (evn envVarNames) processDir(_path string){
 	}
 }
 
-func (evn envVarNames) processFile(_filePath string, _fileMode os.FileMode){
+func (evn envVarNames) processFile(_filePath string, _fileMode os.FileMode) {
 
 	var contentBytes, err = ioutil.ReadFile(_filePath)
 	var resContent = string(contentBytes)
@@ -228,7 +222,7 @@ func (evn envVarNames) processFile(_filePath string, _fileMode os.FileMode){
 		//var content = string(contentBytes)
 		//var resContent = content
 
-		for _, envVar := range evn{
+		for _, envVar := range evn {
 
 			envVarValue := os.Getenv(envVar)
 
@@ -287,7 +281,7 @@ func (evn envVarNames) processFile(_filePath string, _fileMode os.FileMode){
 	log.Printf("INFO: sev succeeded: %s", _filePath)
 }
 
-func (evv envVarValuesSets) processFile(_filePath string, _fileMode os.FileMode){
+func (evv envVarValuesSets) processFile(_filePath string, _fileMode os.FileMode) {
 
 	contentBytes, err := ioutil.ReadFile(_filePath)
 	if err != nil {
@@ -297,17 +291,16 @@ func (evv envVarValuesSets) processFile(_filePath string, _fileMode os.FileMode)
 		var content = string(contentBytes)
 		var resContent = content
 
-
 		for key, value := range evv[VAR_VALUES_SETS_CHOSEN_ID].(map[string]interface{}) {
 
 			var resValue string
 
-			switch reflect.TypeOf(value).String(){
+			switch reflect.TypeOf(value).String() {
 			case "float64":
 				var f = value.(float64)
 				ipart := int64(f)
 				decpart := fmt.Sprintf("%.6g", f-float64(ipart))
-				if len(decpart) == 1{
+				if len(decpart) == 1 {
 					resValue = fmt.Sprintf(`%.0f`, value)
 				} else {
 					resValue = fmt.Sprintf(`%f`, value)
