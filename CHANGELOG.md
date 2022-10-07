@@ -1,3 +1,10 @@
+# [1.2.0](https://github.com/lean-delivery/substitute-env-vars/compare/v1.1.0...v1.2.0) (2022-10-07)
+
+
+### Features
+
+* use semver for docker tag ([b0a11f6](https://github.com/lean-delivery/substitute-env-vars/commit/b0a11f6d9e0541ddf9ae45d7f309ab77bf3c9bb3))
+
 # [1.1.0](https://github.com/lean-delivery/substitute-env-vars/compare/v1.0.0...v1.1.0) (2022-10-07)
 
 
