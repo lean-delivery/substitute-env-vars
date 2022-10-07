@@ -11,10 +11,17 @@ on:
       - '**/*.go'
       - '.github/workflows/release.yml'
 
+env:
+  REGISTRY: ghcr.io
+  IMAGE_NAME: ${{ github.repository }}
+
 jobs:
   release:
     name: Release
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
     # Skip running release workflow on forks
     if: github.repository_owner == 'lean-delivery'
     steps:
@@ -28,8 +35,24 @@ jobs:
         id: semantic
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - name: Build the Docker image
+      - name: Log in to the Container registry
         if: steps.semantic.outputs.new_release_published == 'true'
-        run: |
-          docker build . --file Dockerfile --tag substitute-env-vars:${{ steps.semantic.outputs.new_release_version }}
-          docker push ghcr.io/lean-delivery/substitute-env-vars:${{ steps.semantic.outputs.new_release_version }}
+        uses: docker/login-action@v2
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - name: Extract metadata (tags, labels) for Docker
+        if: steps.semantic.outputs.new_release_published == 'true'
+        id: meta
+        uses: docker/metadata-action@v4
+        with:
+          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+      - name: Build and push Docker image
+        if: steps.semantic.outputs.new_release_published == 'true'
+        uses: docker/build-push-action@v3
+        with:
+          context: .
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
