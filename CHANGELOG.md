@@ -1,3 +1,10 @@
+# [1.3.0](https://github.com/lean-delivery/substitute-env-vars/compare/v1.2.1...v1.3.0) (2022-10-10)
+
+
+### Features
+
+* bump version ([c0b5194](https://github.com/lean-delivery/substitute-env-vars/commit/c0b5194cb91593a69c223b9e287c058a32d70673))
+
 ## [1.2.1](https://github.com/lean-delivery/substitute-env-vars/compare/v1.2.0...v1.2.1) (2022-10-07)
 
 
