@@ -1,0 +1,16 @@
+name: 'Substitute placeholders by env variables'
+description: 'Substitute placeholders by environment variables'
+author: 'Lean Delivery Team'
+branding:
+  icon: 'repeat'  
+  color: 'blue'
+inputs:
+  target:  # id of input
+    description: 'Target file or directory to substitute placeholders'
+    required: true
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  args:
+    - /bin/sev
+    - ${{ inputs.target }}

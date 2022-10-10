@@ -1,0 +1,22 @@
+{
+    "dev": {
+        "REACT_APP_PARAM1": "VALUE1",
+        "REACT_APP_PARAM2": "VALUE2",
+        "REACT_APP_PARAM3": "VALUE3",
+        "REACT_APP_PARAM4": "VALUE4",
+        "REACT_APP_PARAM5": "VALUE5",
+        "REACT_APP_PARAM6": "VALUE6",
+        "REACT_APP_PARAM7": "VALUE7",
+        "REACT_APP_PARAM8": "VALUE8"
+    },
+    "stage": {
+        "REACT_APP_PARAM1": "STAGE_VALUE1",
+        "REACT_APP_PARAM2": "STAGE_VALUE2",
+        "REACT_APP_PARAM3": "STAGE_VALUE3",
+        "REACT_APP_PARAM4": "STAGE_VALUE4",
+        "REACT_APP_PARAM5": "STAGE_VALUE5",
+        "REACT_APP_PARAM6": "STAGE_VALUE6",
+        "REACT_APP_PARAM7": "STAGE_VALUE7",
+        "REACT_APP_PARAM8": "STAGE_VALUE8"
+    }
+}

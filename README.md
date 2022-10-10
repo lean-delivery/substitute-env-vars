@@ -212,8 +212,28 @@ Stores the `JSON structure` which contains the `sets of values`.
 }
 ```
 ##### Example
-```json=
-{"akamai-prod":{"check":"in-structure","cntf_space":"9bnj36vfwq8e","cntf_token":"asd-AsdAsdAsdAsdAsdD-_AsdAsdAsdAsdAsd-As60","cntf_env":"master","chtr_log_level":0},"akamai":{"cntf_space":"asd234asd123asd","cntf_token":"asd-AsdAsdAsdAsdAsdD-_AsdAsdAsdAsdAsd-As60","cntf_env":"chatr-qa1","chtr_log_level":1},"dev":{"cntf_space":"asd456asd123asd","cntf_token":"asd-AsdAsdAsdAsdAsdD-_AsdAsdAsdAsdAsd-As60","cntf_env":"chatr-dev","chtr_log_level":1}}
+```json
+{
+   "akamai-prod":{
+      "check":"in-structure",
+      "cntf_space":"9bnj36vfwq8e",
+      "cntf_token":"asd-AsdAsdAsdAsdAsdD-_AsdAsdAsdAsdAsd-As60",
+      "cntf_env":"master",
+      "chtr_log_level":0
+   },
+   "akamai":{
+      "cntf_space":"asd234asd123asd",
+      "cntf_token":"asd-AsdAsdAsdAsdAsdD-_AsdAsdAsdAsdAsd-As60",
+      "cntf_env":"chatr-qa1",
+      "chtr_log_level":1
+   },
+   "dev":{
+      "cntf_space":"asd456asd123asd",
+      "cntf_token":"asd-AsdAsdAsdAsdAsdD-_AsdAsdAsdAsdAsd-As60",
+      "cntf_env":"chatr-dev",
+      "chtr_log_level":1
+   }
+}
 ```
 #### VAR_VALUES_SETS_CHOSEN_ID
 Contains the `identifier` for preferred `set of values`.
