@@ -1,4 +1,4 @@
-name: 'Substitute placeholders by env variables'
+name: 'Substitute placeholders in files by environment variables'
 description: 'Substitute placeholders by environment variables'
 author: 'Lean Delivery Team'
 branding:
