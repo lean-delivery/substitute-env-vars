@@ -10,7 +10,7 @@ inputs:
     required: true
 runs:
   using: 'docker'
-  image: 'Dockerfile'
+  image: 'docker://ghcr.io/lean-delivery/substitute-env-vars:1.2.1'
   args:
     - /bin/sev
     - ${{ inputs.target }}
