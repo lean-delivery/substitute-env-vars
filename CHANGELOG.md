@@ -1,3 +1,17 @@
+# [1.4.0](https://github.com/lean-delivery/substitute-env-vars/compare/v1.3.0...v1.4.0) (2022-10-12)
+
+
+### Bug Fixes
+
+* add semantic-release/exec plugin ([cf7cd17](https://github.com/lean-delivery/substitute-env-vars/commit/cf7cd175f045893cff74726983fc78db8a46e5e4))
+
+
+### Features
+
+* add version auto updater ([36cf4f0](https://github.com/lean-delivery/substitute-env-vars/commit/36cf4f019a0cc0acdf7ebb84f03243be2f2ce277))
+* update action name ([97d99b9](https://github.com/lean-delivery/substitute-env-vars/commit/97d99b931ace75179cede778f2d9b8c0bb3677f3))
+* use pre-build docker image for action ([6168006](https://github.com/lean-delivery/substitute-env-vars/commit/61680063b9d51a179f5ed99aa747e9f0bd9c3d0a))
+
 # [1.3.0](https://github.com/lean-delivery/substitute-env-vars/compare/v1.2.1...v1.3.0) (2022-10-10)
 
 

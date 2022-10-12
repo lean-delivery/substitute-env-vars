@@ -2,15 +2,15 @@ name: 'Substitute placeholders in files by environment variables'
 description: 'Substitute placeholders by environment variables'
 author: 'Lean Delivery Team'
 branding:
-  icon: 'repeat'  
+  icon: 'repeat'
   color: 'blue'
 inputs:
-  target:  # id of input
+  target: # id of input
     description: 'Target file or directory to substitute placeholders'
     required: true
 runs:
   using: 'docker'
-  image: 'docker://ghcr.io/lean-delivery/substitute-env-vars:1.2.1'
+  image: 'docker://ghcr.io/lean-delivery/substitute-env-vars:1.4.0'
   args:
     - /bin/sev
     - ${{ inputs.target }}
